@@ -14,6 +14,8 @@ export const createUser = async (body: IUser) => {
     });
     return user;
   } catch (error) {
+    console.log(error);
+    
     throw error;
   }
 };

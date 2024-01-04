@@ -1,7 +1,17 @@
 import { createUser } from '../../repository/createUser';
+import { findUsersByEmailAndUsername } from '../../repository/findUsersByEmailAndUsername';
 import { IUser } from '../../type/user.type';
 
 export const registerAction = async(body: IUser) => {
+  const users = await findUsersByEmailAndUsername(body.email, body.username);
+
+  if (users.length) {
+    return {
+      status: 400,
+      message: "email or username already exist",
+    };
+  }
+
   const create = await createUser(body);
   try {
     return {
@@ -9,6 +19,8 @@ export const registerAction = async(body: IUser) => {
       create
     };
   } catch (error) {
+    console.log(error);
+    
     throw error;
   }
 };

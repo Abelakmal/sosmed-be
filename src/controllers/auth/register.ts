@@ -6,6 +6,8 @@ export const register = async (req:Request, res:Response, next:NextFunction) =>{
         const user = await registerAction(req.body)
         res.status(user.status).send(user)
     } catch (error) {
+        console.log(error);
+        
         next(error)
     }
 }
