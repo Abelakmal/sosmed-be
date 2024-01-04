@@ -1,3 +1,4 @@
+
 import { hashPassword } from '../../helpers/bcrypt';
 import { createUser } from '../../repository/createUser';
 import { findUsersByEmailAndUsername } from '../../repository/findUsersByEmailAndUsername';
@@ -10,7 +11,7 @@ export const registerAction = async(body: IUser) => {
   if (users.length) {
     return {
       status: 400,
-      message: "email or username already exist",
+      message: 'email or username already exist',
     };
   }
   const hashedPassword = await hashPassword(password);
@@ -23,7 +24,7 @@ export const registerAction = async(body: IUser) => {
     };
   } catch (error) {
     console.log(error);
-    
+
     throw error;
   }
 };
