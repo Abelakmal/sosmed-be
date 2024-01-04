@@ -1,7 +1,6 @@
-
 import { hashPassword } from '../../helpers/bcrypt';
-import { createUser } from '../../repository/createUser';
-import { findUsersByEmailAndUsername } from '../../repository/findUsersByEmailAndUsername';
+import { createUser } from '../../repository/users/createUser';
+import { findUsersByEmailAndUsername } from '../../repository/users/findUsersByEmailAndUsername';
 import { IUser } from '../../type/user.type';
 
 export const registerAction = async(body: IUser) => {
