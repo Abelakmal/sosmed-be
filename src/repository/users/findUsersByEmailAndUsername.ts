@@ -1,10 +1,6 @@
-import { prisma } from "../helpers/prisma";
+import { prisma } from '../../helper/prisma';
 
-
-export const findUsersByEmailAndUsername = async (
-  email: string,
-  username: string
-) => {
+export const findUsersByEmailAndUsername = async (email: string, username: string) => {
   try {
     const users = await prisma.users.findMany({
       where: {
