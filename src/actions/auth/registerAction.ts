@@ -1,9 +1,12 @@
-import { createUser } from '../../repository/users/createUser';
-import { findUsersByEmailAndUsername } from '../../repository/users/findUsersByEmailAndUsername';
+
+import { hashPassword } from '../../helpers/bcrypt';
+import { createUser } from '../../repository/createUser';
+import { findUsersByEmailAndUsername } from '../../repository/findUsersByEmailAndUsername';
 import { IUser } from '../../type/user.type';
 
-export const registerAction = async (body: IUser) => {
-  const users = await findUsersByEmailAndUsername(body.email, body.username);
+export const registerAction = async(body: IUser) => {
+  const { email, username, password } = body;
+  const users = await findUsersByEmailAndUsername(email, username);
 
   if (users.length) {
     return {
@@ -11,12 +14,13 @@ export const registerAction = async (body: IUser) => {
       message: 'email or username already exist',
     };
   }
-
-  const create = await createUser(body);
+  const hashedPassword = await hashPassword(password);
+  body.password = hashedPassword;
+  await createUser(body);
   try {
     return {
       status: 200,
-      create,
+      message: "Register new user success"
     };
   } catch (error) {
     console.log(error);
