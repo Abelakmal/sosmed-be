@@ -1,14 +1,14 @@
-import { createUser } from '../../repository/createUser';
-import { findUsersByEmailAndUsername } from '../../repository/findUsersByEmailAndUsername';
+import { createUser } from '../../repository/users/createUser';
+import { findUsersByEmailAndUsername } from '../../repository/users/findUsersByEmailAndUsername';
 import { IUser } from '../../type/user.type';
 
-export const registerAction = async(body: IUser) => {
+export const registerAction = async (body: IUser) => {
   const users = await findUsersByEmailAndUsername(body.email, body.username);
 
   if (users.length) {
     return {
       status: 400,
-      message: "email or username already exist",
+      message: 'email or username already exist',
     };
   }
 
@@ -16,11 +16,11 @@ export const registerAction = async(body: IUser) => {
   try {
     return {
       status: 200,
-      create
+      create,
     };
   } catch (error) {
     console.log(error);
-    
+
     throw error;
   }
 };
