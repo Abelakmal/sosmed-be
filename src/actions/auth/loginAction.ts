@@ -42,14 +42,12 @@ export const loginAction = async (
       };
     }
 
-    const dataWithoutPassword = excludeFields(user, ["password","createdAt","updatedAt"]);
-
     const token = createToken({ id: user.id });
 
     return {
       status: 200,
       message: "login success",
-      data: dataWithoutPassword,
+      data: excludeFields(user, ["password","isDeleted","createdAt","updatedAt"]),
       token,
     };
   } catch (error) {
