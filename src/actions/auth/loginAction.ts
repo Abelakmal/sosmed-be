@@ -10,6 +10,8 @@ export const loginAction = async (
 ) => {
   try {
     let user;
+    console.log(usernameOrEmail);
+    
 
     if (usernameOrEmail.includes("@")) {
       user = await findUserByEmail(usernameOrEmail);
@@ -40,7 +42,7 @@ export const loginAction = async (
       };
     }
 
-    const dataWithoutPassword = excludeFields(user, ["password"]);
+    const dataWithoutPassword = excludeFields(user, ["password","createdAt","updatedAt"]);
 
     const token = createToken({ id: user.id });
 

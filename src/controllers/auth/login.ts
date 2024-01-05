@@ -8,6 +8,8 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
+    console.log(req.body);
+    
     const { usernameOrEmail, password } = req.body;
     const result = await loginAction(usernameOrEmail, password);
 
