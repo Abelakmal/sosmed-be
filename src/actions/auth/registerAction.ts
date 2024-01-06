@@ -1,5 +1,5 @@
 import { uploadImage } from '../../helper/uploadImage';
-import { hashPassword } from '../../helpers/bcrypt';
+import { hashPassword } from '../../helper/bcrypt';
 import { createUser } from '../../repository/users/createUser';
 import { findUsersByEmailAndUsername } from '../../repository/users/findUsersByEmailAndUsername';
 import { IUser } from '../../type/user.type';
